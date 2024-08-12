@@ -1,0 +1,30 @@
+version: "1"
+
+package:
+  id: io.github.qterm
+  name: qterm
+  version: 0.7.4.1
+  kind: app
+  description: |
+    BBS client based on Qt
+
+command:
+  - /opt/apps/io.github.qterm/files/bin/qterm
+
+base: org.deepin.foundation/23.0.0
+runtime: org.deepin.Runtime/23.0.1
+
+sources:
+  - kind: git
+    url: https://github.com/qterm/qterm.git
+    version: master
+    commit: c87e595bc4bfcfdb86a93404221a5c319179b360
+
+build: |
+  cd /project/linglong/sources/qterm.git
+  mkdir build
+  cd build
+  cmake .. \
+        -DQT5=YES \
+        -DCMAKE_INSTALL_PREFIX=${PREFIX}
+  cmake --build . --target install
